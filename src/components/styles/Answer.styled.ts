@@ -7,4 +7,5 @@ export const StyledAnswer = styled.div`
     margin-bottom: 10px;
     background-color: #f9f9f9;
     color: red;
+    cursor: pointer;
 `;
