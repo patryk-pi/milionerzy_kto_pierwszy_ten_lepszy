@@ -9,5 +9,6 @@ export const StyledContainer = styled.div`
         margin-bottom: 40px;
         color: #fff;
         font-size: 35px;
+        margin-top: 20px;
     }
 `;

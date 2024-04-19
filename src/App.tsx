@@ -4,6 +4,10 @@ import Buttons from "./components/Buttons";
 import { StyledAnswerContainer } from "./components/styles/Answer.styled";
 import { StyledContainer } from "./components/styles/Container.styled";
 import GlobalStyles from "./components/styles/Global";
+import {
+    StyledAnswersOrder,
+    StyledStopWatch,
+} from "./components/styles/Summary.styled";
 
 function App() {
     const answers: string[] = ["A", "B", "C", "D"];
@@ -75,16 +79,16 @@ function App() {
                     ))}
                 </StyledAnswerContainer>
                 <Buttons startGame={startGame} stopGame={stopGame} />
-                <div>
+                <StyledStopWatch>
                     {seconds.toString().padStart(2, "0")}:
-                    {milliseconds.toString().padStart(2, "0")}
-                </div>
+                    {milliseconds.toString().padStart(3, "0")}
+                </StyledStopWatch>
                 {!isRunning && (
-                    <div>
+                    <StyledAnswersOrder>
                         {answersOrder.map((answer, index) => (
                             <p key={index}>{answer}</p>
                         ))}
-                    </div>
+                    </StyledAnswersOrder>
                 )}
             </StyledContainer>
         </>
