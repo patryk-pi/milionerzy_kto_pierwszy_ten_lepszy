@@ -6,7 +6,16 @@ interface AnswerProps {
 }
 
 const Answer = ({ answer }: AnswerProps) => {
-    const [disabled, setDisabled] = useState(true);
-    return <StyledAnswer>{answer}</StyledAnswer>;
+    const selectAnswer = () => {
+        setIsDisabled(!isDisabled);
+    };
+
+    const [isDisabled, setIsDisabled] = useState(true);
+
+    return (
+        <StyledAnswer onClick={selectAnswer} state={isDisabled}>
+            {answer}
+        </StyledAnswer>
+    );
 };
 export default Answer;
