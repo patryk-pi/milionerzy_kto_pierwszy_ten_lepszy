@@ -18,12 +18,19 @@ function App() {
         setIsDisabled(newIsDisabled);
     };
 
+    const [answersOrder, setAnswersOrder] = useState<string[]>([]);
+
     const startGame = () => {
+        setAnswersOrder([]);
+        setTime(0);
         setIsDisabled(Array(answers.length).fill(false));
-        setIsRunning(!isRunning);
+        setIsRunning(true);
     };
 
-    const [answersOrder, setAnswersOrder] = useState<string[]>([]);
+    const stopGame = () => {
+        if (answersOrder.length !== 4) return;
+        setIsRunning(false);
+    };
 
     const addAnswerToOrder = (answer: string) => {
         setAnswersOrder((prevOrder) => [...prevOrder, answer]);
@@ -67,16 +74,18 @@ function App() {
                         />
                     ))}
                 </StyledAnswerContainer>
-                <Buttons startGame={startGame} />
+                <Buttons startGame={startGame} stopGame={stopGame} />
                 <div>
                     {seconds.toString().padStart(2, "0")}:
                     {milliseconds.toString().padStart(2, "0")}
                 </div>
-                <div>
-                    {answersOrder.map((answer, index) => (
-                        <p key={index}>{answer}</p>
-                    ))}
-                </div>
+                {!isRunning && (
+                    <div>
+                        {answersOrder.map((answer, index) => (
+                            <p key={index}>{answer}</p>
+                        ))}
+                    </div>
+                )}
             </StyledContainer>
         </>
     );
