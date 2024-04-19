@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 interface StyledAnswerProps {
     state: boolean;
+    disabled?: boolean;
 }
 
-export const StyledAnswer = styled.div<StyledAnswerProps>`
+export const StyledAnswer = styled.button<StyledAnswerProps>`
     padding: 20px 120px;
     border: 1px solid #ccc;
     border-radius: 5px;

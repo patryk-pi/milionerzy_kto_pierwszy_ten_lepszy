@@ -3,19 +3,24 @@ import { StyledAnswer } from "./styles/Answer.styled";
 
 interface AnswerProps {
     answer: string;
+    isDisabled: boolean;
+    setIsDisabled: (value: boolean) => void;
 }
 
-const Answer = ({ answer }: AnswerProps) => {
+const Answer = ({ answer, isDisabled, setIsDisabled }: AnswerProps) => {
     const selectAnswer = () => {
         setIsDisabled(!isDisabled);
     };
 
-    const [isDisabled, setIsDisabled] = useState(true);
-
     return (
-        <StyledAnswer onClick={selectAnswer} state={isDisabled}>
+        <StyledAnswer
+            onClick={selectAnswer}
+            state={isDisabled}
+            disabled={isDisabled}
+        >
             {answer}
         </StyledAnswer>
     );
 };
+
 export default Answer;
