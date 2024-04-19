@@ -17,6 +17,8 @@ function App() {
     );
 
     const setIndividualDisabled = (index: number, value: boolean) => {
+        if (!isRunning) return;
+
         const newIsDisabled = [...isDisabled];
         newIsDisabled[index] = value;
         setIsDisabled(newIsDisabled);
@@ -37,6 +39,7 @@ function App() {
     };
 
     const addAnswerToOrder = (answer: string) => {
+        if (!isRunning) return;
         setAnswersOrder((prevOrder) => [...prevOrder, answer]);
     };
 
