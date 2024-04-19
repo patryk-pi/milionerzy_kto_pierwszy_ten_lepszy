@@ -6,13 +6,15 @@ interface StyledAnswerProps {
 }
 
 export const StyledAnswer = styled.button<StyledAnswerProps>`
-    padding: 20px 120px;
+    padding: 20px 150px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
     background-color: ${({ state }) => (state ? "orange" : "white")};
     color: red;
     cursor: pointer;
+    font-size: 25px;
+    font-weight: 700;
 `;
 
 export const StyledAnswerContainer = styled.div`

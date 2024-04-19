@@ -27,6 +27,7 @@ function App() {
     const [answersOrder, setAnswersOrder] = useState<string[]>([]);
 
     const startGame = () => {
+        if (isRunning) return;
         setAnswersOrder([]);
         setTime(0);
         setIsDisabled(Array(answers.length).fill(false));
