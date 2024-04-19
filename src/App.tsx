@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Answer from "./components/Answer";
 import Buttons from "./components/Buttons";
 import { StyledAnswerContainer } from "./components/styles/Answer.styled";
@@ -20,7 +20,33 @@ function App() {
 
     const startGame = () => {
         setIsDisabled(Array(answers.length).fill(false));
+        setIsRunning(!isRunning);
     };
+
+    const [answersOrder, setAnswersOrder] = useState<string[]>([]);
+
+    const addAnswerToOrder = (answer: string) => {
+        setAnswersOrder((prevOrder) => [...prevOrder, answer]);
+    };
+
+    const [time, setTime] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+
+    useEffect(() => {
+        let intervalId: number;
+
+        if (isRunning) {
+            intervalId = setInterval(() => setTime(time + 1), 10);
+        }
+
+        return () => clearInterval(intervalId);
+    }, [isRunning, time]);
+
+    // Seconds calculation
+    const seconds = Math.floor((time % 6000) / 100);
+
+    // Milliseconds calculation
+    const milliseconds = time % 100;
 
     return (
         <>
@@ -36,10 +62,21 @@ function App() {
                             setIsDisabled={(value) =>
                                 setIndividualDisabled(index, value)
                             }
+                            answersOrder={answersOrder}
+                            setAnswersOrder={addAnswerToOrder}
                         />
                     ))}
                 </StyledAnswerContainer>
                 <Buttons startGame={startGame} />
+                <div>
+                    {seconds.toString().padStart(2, "0")}:
+                    {milliseconds.toString().padStart(2, "0")}
+                </div>
+                <div>
+                    {answersOrder.map((answer, index) => (
+                        <p key={index}>{answer}</p>
+                    ))}
+                </div>
             </StyledContainer>
         </>
     );
