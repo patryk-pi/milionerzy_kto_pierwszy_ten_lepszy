@@ -51,17 +51,23 @@ function App() {
         let intervalId: number;
 
         if (isRunning) {
-            intervalId = setInterval(() => setTime(time + 1), 10);
+            intervalId = setInterval(
+                () => setTime((prevTime) => prevTime + 1),
+                10
+            );
         }
 
+        console.log(milliseconds);
+
         return () => clearInterval(intervalId);
-    }, [isRunning, time]);
+    }, [isRunning]);
 
     // Seconds calculation
-    const seconds = Math.floor((time % 6000) / 100);
+    const seconds = Math.floor(time / 100);
 
     // Milliseconds calculation
     const milliseconds = time % 100;
+    const formattedMilliseconds = milliseconds.toString().padStart(2, "0");
 
     return (
         <>
@@ -85,7 +91,7 @@ function App() {
                 <Buttons startGame={startGame} stopGame={stopGame} />
                 <StyledStopWatch>
                     {seconds.toString().padStart(2, "0")}:
-                    {milliseconds.toString().padStart(3, "0")}
+                    {formattedMilliseconds}
                 </StyledStopWatch>
                 {!isRunning && (
                     <StyledAnswersOrder>
